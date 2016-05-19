@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MartianLander</string>
+    <string name="restart">Restart</string>
+</resources>
