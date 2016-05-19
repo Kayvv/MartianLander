@@ -1,73 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:clickable="true"
     android:orientation="vertical" >
 
-    <com.example.unitec.martianlander.AnimationView
+    <view.AnimationView
         android:id="@+id/animationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <RelativeLayout
-        android:id="@+id/buttonGroup"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <Button
-            android:id="@+id/btnRestart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/restart" />
-
-        <Button
-            android:id="@+id/btnLeft"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="22dp"
-            android:layout_marginLeft="23dp"
-            android:background="@mipmap/buttonshape"
-            android:minHeight="150dip"
-            android:minWidth="150dip"
-            android:text="Left"
-            tools:ignore="HardcodedText" />
-
-
-        <Button
-            android:id="@+id/btnUp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="22dp"
-            android:layout_marginLeft="23dp"
-            android:background="@mipmap/buttonshape"
-            android:minHeight="150dip"
-            android:minWidth="150dip"
-            android:text="Up"
-            tools:ignore="HardcodedText" />
-
-
-        <Button
-            android:id="@+id/btnRight"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignBaseline="@+id/btnLeft"
-            android:layout_alignBottom="@+id/btnLeft"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="23dp"
-            android:background="@mipmap/right"
-            android:minHeight="150dip"
-            android:minWidth="150dip"
-            android:text="Right"
-            tools:ignore="HardcodedText" />
-
-    </RelativeLayout>
+    <include layout="@layout/control_buttons"/>
 
 </FrameLayout>

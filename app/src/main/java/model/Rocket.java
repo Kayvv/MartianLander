@@ -1,10 +1,12 @@
-package com.example.unitec.martianlander;
+package model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
+
+import com.example.unitec.martianlander.R;
 
 import java.util.Random;
 
@@ -13,56 +15,52 @@ import java.util.Random;
  */
 public class Rocket {
 
-    public Bitmap rocketImage;
-    public Bitmap thrusterImage;
-    public Bitmap flameImage;
-    public int bmpPosX,bmpPosY;
-    public boolean left = false;
-    public boolean right = false;
-    public boolean up = false;
+    public Bitmap rocketImage,thrusterImage,flameImage;
+    public int bmpPosX,bmpPosY,startX;
+    public String direction = "down";
     Random random = new Random();
-
+    //--- Constructor ---
     public Rocket(Context context){
-        rocketImage = BitmapFactory.decodeResource(context.getResources(),R.mipmap.craftmain);
+        rocketImage = BitmapFactory.decodeResource(context.getResources(), R.mipmap.craftmain);
         thrusterImage = BitmapFactory.decodeResource(context.getResources(),R.mipmap.thruster);
         flameImage = BitmapFactory.decodeResource(context.getResources(),R.mipmap.main_flame);
         bmpPosX=random.nextInt(1000);
+        startX = bmpPosX;
         bmpPosY=0;
     }
 
+    //This four methods are used to change the rocket's movement.
     public void moveDown(){
         bmpPosY++;
+        direction = "down";
     }
-
     public void moveLeft(){
         bmpPosX-=10;
-        left = true;
+        direction = "left";
     }
-
     public void moveRight(){
         bmpPosX+=10;
-        right = true;
+        direction = "right";
     }
-
     public void moveUp(){
         bmpPosY-=10;
-        up = true;
+        direction = "up";
     }
 
+    //This method is used to draw the rocket.
     public void draw(Canvas canvas){
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         canvas.drawBitmap(rocketImage, bmpPosX, bmpPosY, null);
-        if(left) {
-            canvas.drawBitmap(thrusterImage, bmpPosX + 51, bmpPosY + 52, null);
-            left = false;
-        }
-        if(right){
-            canvas.drawBitmap(thrusterImage, bmpPosX, bmpPosY + 52, null);
-            right = false;
-        }
-        if(up){
-            canvas.drawBitmap(flameImage,bmpPosX+21,bmpPosY+52,null);
-            up = false;
+        switch (direction){
+            case "left":
+                canvas.drawBitmap(thrusterImage, bmpPosX + 51, bmpPosY + 52, null);
+                break;
+            case "right":
+                canvas.drawBitmap(thrusterImage, bmpPosX, bmpPosY + 52, null);
+                break;
+            case "up":
+                canvas.drawBitmap(flameImage,bmpPosX+21,bmpPosY+52,null);
+                break;
         }
     }
 }

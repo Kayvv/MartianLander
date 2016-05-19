@@ -1,4 +1,4 @@
-package com.example.unitec.martianlander;
+package model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
 import android.util.Log;
+
+import com.example.unitec.martianlander.R;
 
 import java.util.Random;
 
@@ -24,15 +26,10 @@ public class Mars {
     public Bitmap marsImage;
     //The shader that renders the Bitmap
     private BitmapShader marsImageShader;
-
     private int xPolygon[];
     private int yPolygon[];
-
     private int savePlace;
-
-
     Random random = new Random();
-
 
     public Mars(Context context){
         marsImage = BitmapFactory.decodeResource(context.getResources(), R.mipmap.mars);
@@ -41,41 +38,35 @@ public class Mars {
         yPolygon = new int[14];
         setLand();
     }
-
+// This method is used to set all the point of the Mars surface
     public void setLand(){
         for(int i = 0;i<14;i++){
             int j = random.nextInt(50)+90*i-50;
             xPolygon[i] =j;
-            yPolygon[i]= random.nextInt(250)+400;
+            yPolygon[i]= random.nextInt(230)+400;
         }
-        savePlace = random.nextInt(12)+2;
+        //To set the save place
+        savePlace = random.nextInt(9)+2;
         yPolygon[savePlace]= yPolygon[savePlace-1];
     }
-
+//This two methods are used to get the current x and y point of the land.
     public int getXLand(int i){
         return xPolygon[i];
     }
     public int getYLand(int i){
         return yPolygon[i];
     }
-
+//This method is to find out the current y point according to the rocket's x point
     public int getRocketY(int i,int rocketX){
         int rocketY;
         int rates=(getXLand(i+1)-rocketX)*(getYLand(i) - getYLand(i + 1))/(getXLand(i+1)-getXLand(i));
         rocketY = getYLand(i+1)+rates;
-        String Ystring = String.valueOf(rocketY)+"="+String.valueOf(getYLand(i + 1))+"+"+
-                "("+String.valueOf(getXLand(i+1))+"-"+String.valueOf(rocketX)+")"+"*"+
-                String.valueOf((getYLand(i) - getYLand(i+1)))+"/"+String.valueOf((getXLand(i+1)-getXLand(i)));
-        Log.d("RocketY",String.valueOf(Ystring));
         return rocketY;
     }
-
-
+//This method is used to draw the Mars.
     public void draw(Canvas canvas) {
         path = new Path();
-
         path.moveTo(0, 780);
-
         for(int i= 0; i<xPolygon.length; i++){
             path.lineTo(xPolygon[i], yPolygon[i]);
         }
